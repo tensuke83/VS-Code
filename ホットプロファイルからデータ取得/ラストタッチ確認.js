@@ -190,7 +190,7 @@ function updateLastTouchStep() {
                 // ★API最適化: search[client_name] + order[visit_on desc] + limit 10
                 const payload = {
                     api_key: apiKey,
-                    search: { client_name: cName },
+                    search: { client_name: cName, department: "GLUE" },
                     page: { display_number: 10, number: 1 },
                     order: { key: "visit_on", type: "desc" }
                 };
@@ -446,7 +446,8 @@ function fetchDailyReportsByUpdatedRange(apiKey, fromUpdatedOn, toUpdatedOn, pag
             api_key: apiKey,
             search: {
                 from_datetime_updated_on: fromUpdatedOn,
-                to_datetime_updated_on: toUpdatedOn
+                to_datetime_updated_on: toUpdatedOn,
+                department: "GLUE"
             },
             page: {
                 display_number: pageSize,
@@ -764,7 +765,7 @@ function forceUpdateLastTouch(targets) {
             contentType: "application/json",
             payload: JSON.stringify({
                 api_key: apiKey,
-                search: { client_name: String(t.companyName).trim() },
+                search: { client_name: String(t.companyName).trim(), department: "GLUE" },
                 page: { display_number: 10, number: 1 },
                 order: { key: "visit_on", type: "desc" }
             }),
